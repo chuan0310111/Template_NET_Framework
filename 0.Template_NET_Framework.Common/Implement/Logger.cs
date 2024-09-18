@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿using NLog; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Web;
 
 namespace _0.Template_NET_Framework.Common.Implement
 {
-    public class Logger
+    public class Logger : Interface.ILogger
     {
         private readonly ILogger _logger;
         private readonly string _channel;
