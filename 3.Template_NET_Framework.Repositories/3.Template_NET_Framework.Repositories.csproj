@@ -44,5 +44,11 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\0.Template_NET_Framework.Common\0.Template_NET_Framework.Common.csproj">
+      <Project>{219841db-befe-434d-b979-929f9cdafd50}</Project>
+      <Name>0.Template_NET_Framework.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
