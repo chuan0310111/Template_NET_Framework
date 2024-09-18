@@ -1,9 +1,17 @@
 using _0.Template_NET_Framework.Common.Implement; 
 using _0.Template_NET_Framework.Common.Interface;
+using _1.Template_NET_Framework.Application.WebApi.Infrastructure.AutoMapper;
+using _2.Template_NET_Framework.Services.Implement;
+using _2.Template_NET_Framework.Services.Infrastructure.AutoMapper;
+using _2.Template_NET_Framework.Services.Interface;
+using _3.Template_NET_Framework.Repositories.Implement;
+using _3.Template_NET_Framework.Repositories.Interface;
 using AutoMapper;
 using AutoMapper.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using Unity;
@@ -72,14 +80,44 @@ namespace _1.Template_NET_Framework.Application
                 ct => {
 
                     var mce = new MapperConfigurationExpression();
-                    //mce.AddProfile(typeof(#if))
+
+                    mce.AddProfile(typeof(ControllerMapperProfiler));
+                    mce.AddProfile(typeof(ServiceMapperProfiler));
 
                     var mc = new MapperConfiguration(mce);
                     return new Mapper(mc);
                 }, new SingletonLifetimeManager()
                 );
 
+            container.RegisterType<ISampleService, SampleService>();
+
             container.RegisterType<IHttpContextBaseCommon, HttpContextBaseCommon>();
+
+            container.RegisterFactory<HttpClient>("HsinChuHttpClient", _ =>
+            {
+                var baseUri = new Uri(WebConfigurationManager.AppSettings["hsinchuGovUrl"]);
+
+                //設定1分鐘沒有活動即關閉連線，預設-1(永不關閉)
+                ServicePointManager.FindServicePoint(baseUri).ConnectionLeaseTimeout = (int)TimeSpan.FromMinutes(1).TotalMilliseconds;
+
+                //設定1分鐘更新DNS，預設12000(2分鐘)
+                ServicePointManager.DnsRefreshTimeout = (int)TimeSpan.FromMinutes(1).TotalMilliseconds;
+
+                var handler = new HttpClientHandler
+                {
+
+                };
+
+                var httpClient = HttpClientFactory.Create(handler);
+                httpClient.BaseAddress = baseUri;
+                return httpClient;
+            }, new SingletonLifetimeManager());
+
+            container.RegisterType<IHsinChuRepository, HsinChuRepository>(
+                new InjectionConstructor(
+                    new ResolvedParameter<ILogger>(),
+                    new ResolvedParameter<HttpClient>("HsinChuHttpClient")
+                    ));
 
         }
     }

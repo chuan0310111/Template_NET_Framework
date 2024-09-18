@@ -26,7 +26,7 @@ namespace _0.Template_NET_Framework.Common.Implement
                 }
             }
 
-            if (infos == null && !infos.ContainsKey("spent"))
+            if (infos == null || !infos.ContainsKey("spent"))
             {
                 logInfo.Properties.Add("spent", 0);
             }

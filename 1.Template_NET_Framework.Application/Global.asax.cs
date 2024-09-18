@@ -18,6 +18,16 @@ namespace _1.Template_NET_Framework.Application
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e) {
+
+            HttpContext.Current.Items["MessageId"] = Guid.NewGuid().ToString("N").Substring(0, 8);
+        }
+
+
     }
 }

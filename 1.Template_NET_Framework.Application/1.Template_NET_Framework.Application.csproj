@@ -183,7 +183,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApi\Infrastructure\AutoMapper\ControllerMapperProfiler.cs" />
     <Compile Include="WebApi\SampleController.cs" />
+    <Compile Include="WebApi\ViewModels\BaseViewModel.cs" />
+    <Compile Include="WebApi\ViewModels\HsinChuAreaResultViewModel.cs" />
+    <Compile Include="WebApi\ViewModels\HsinChuAreaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -334,6 +338,10 @@
     <ProjectReference Include="..\2.Template_NET_Framework.Services\2.Template_NET_Framework.Services.csproj">
       <Project>{1694d29e-0562-4d2a-b217-1f8ddc7b0472}</Project>
       <Name>2.Template_NET_Framework.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3.Template_NET_Framework.Repositories\3.Template_NET_Framework.Repositories.csproj">
+      <Project>{1F15BB13-C637-41B4-94EE-BC3B1B45443C}</Project>
+      <Name>3.Template_NET_Framework.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
