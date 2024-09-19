@@ -1,4 +1,5 @@
 ﻿using _0.Template_NET_Framework.Common.Interface;
+using _1.Template_NET_Framework.Application.WebApi.Filters;
 using _1.Template_NET_Framework.Application.WebApi.ViewModels;
 using _2.Template_NET_Framework.Services.Dtos;
 using _2.Template_NET_Framework.Services.Interface;
@@ -28,8 +29,8 @@ namespace _1.Template_NET_Framework.Application.WebApi
             _sampleService = sampleService;
         }
 
-
-        public HsinChuAreaResultViewModel Get() { 
+        [TimeLog]
+        public HsinChuAreaResultViewModel GetAreas() { 
             var cMethed = MethodBase.GetCurrentMethod();
             var logTitle = $"{cMethed.DeclaringType.Name}.{cMethed.Name}";
             var result = new HsinChuAreaResultViewModel();

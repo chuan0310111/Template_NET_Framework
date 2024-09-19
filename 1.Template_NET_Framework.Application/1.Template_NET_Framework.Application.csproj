@@ -183,6 +183,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApi\Filters\TimeLogAttribute.cs" />
     <Compile Include="WebApi\Infrastructure\AutoMapper\ControllerMapperProfiler.cs" />
     <Compile Include="WebApi\SampleController.cs" />
     <Compile Include="WebApi\ViewModels\BaseViewModel.cs" />
