@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.Template_NET_Framework.Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.Template_NET_Framework.Application", "1.Template_NET_Framework.Application\1.Template_NET_Framework.Application.csproj", "{5AF44C66-711B-4BD1-A169-128C2AB4515E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.Template_NET_Framework.Tests", "4.Template_NET_Framework.Tests\4.Template_NET_Framework.Tests.csproj", "{496E627D-98BB-447B-8749-E91BEBFA4C21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5AF44C66-711B-4BD1-A169-128C2AB4515E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AF44C66-711B-4BD1-A169-128C2AB4515E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AF44C66-711B-4BD1-A169-128C2AB4515E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496E627D-98BB-447B-8749-E91BEBFA4C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496E627D-98BB-447B-8749-E91BEBFA4C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496E627D-98BB-447B-8749-E91BEBFA4C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496E627D-98BB-447B-8749-E91BEBFA4C21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
