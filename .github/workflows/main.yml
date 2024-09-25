@@ -1,0 +1,35 @@
+name: CI/CD to IIS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Framework
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '4.8'
+
+    - name: Build
+      run: msbuild YourProject.sln /p:Configuration=Release
+
+    - name: Publish
+      run: msbuild YourProject.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=YourPublishProfile.pubxml
+
+    - name: Deploy to IIS
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.IIS_HOST }}
+        username: ${{ secrets.IIS_USERNAME }}
+        password: ${{ secrets.IIS_PASSWORD }}
+        port: 22
+        source: "path/to/your/published/files/*"
+        target: "/path/on/iis"
