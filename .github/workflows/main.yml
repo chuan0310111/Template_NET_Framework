@@ -13,11 +13,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install MSBuild and Visual Studio components
+      run: |
+        choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional"
+        choco install visualstudio-installer
+        export PATH="$PATH:/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
+
+    - name: Locate MSBuild
+      id: msbuild
+      run: |
+        $msbuild = &"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+        echo "MSBuild path is: $msbuild"
+        echo "##[set-output name=msbuild_path;$msbuild]"
+
     - name: Build .NET Framework 4.8 solution
-      run: msbuild YourProject.sln /p:Configuration=Release
+      run: |
+        ${{ steps.msbuild.outputs.msbuild_path }} YourProject.sln /p:Configuration=Release
 
     - name: Publish the project
-      run: msbuild YourProject.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=YourPublishProfile.pubxml
+      run: |
+        ${{ steps.msbuild.outputs.msbuild_path }} YourProject.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=YourPublishProfile.pubxml
 
     - name: Deploy to IIS
       uses: appleboy/scp-action@master
